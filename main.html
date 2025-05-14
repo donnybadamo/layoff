@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Severance Document Analysis with Claude AI - Employee Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'SF Pro Text', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fdfdfd;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
+            color: #2c3e50;
+            padding: 3rem 0;
+            text-align: center;
+            border-bottom: 1px solid #dadce0;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            font-weight: 400;
+            color: #6c757d;
+        }
+
+        .author-message {
+            background: #fefcfc;
+            border: 1px solid #e0e4e7;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 1rem auto 2rem auto;
+            max-width: 800px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            border-left: 4px solid #78909c;
+            text-align: left;
+        }
+
+        .author-message h3 {
+            color: #5d4e75;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .author-message p {
+            color: #626262;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .author-message .signature {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f0f0f0;
+            font-weight: normal;
+            color: #5d4e75;
+        }
+
+        .author-message .signature p {
+            margin-bottom: 0.3rem;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            color: #374151;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #d1d5db;
+            border-left: 4px solid #6b73ff;
+        }
+
+        .alert-box h2 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            color: #1f2937;
+        }
+
+        .alert-box a {
+            color: #4338ca;
+            text-decoration: underline;
+        }
+
+        .alert-box h2 {
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.8rem 0;
+            font-weight: 600;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        ul, ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+
+        .step-card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border: 1px solid #f1f3f4;
+            border-left: 4px solid #6c757d;
+        }
+
+        .code-block {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: 'SF Mono', Monaco, 'Cascadia Code', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            color: #495057;
+            overflow-x: auto;
+        }
+
+        .tip-box {
+            background: #f8f9fa;
+            border-left: 4px solid #6c757d;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid #e9ecef;
+        }
+
+        .warning-box {
+            background: #fefefe;
+            border-left: 4px solid #adb5bd;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+            border: 1px solid #e9ecef;
+        }
+
+        .button {
+            display: inline-block;
+            background: #495057;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background: #343a40;
+        }
+
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .resource-card {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+        }
+
+        .resource-card h4 {
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .emoji {
+            font-size: 1.2em;
+            margin-right: 0.5em;
+        }
+
+        .button {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .button:hover {
+            background: #5a67d8;
+        }
+
+        footer {
+            background: #f8f9fa;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 3rem;
+            border-top: 1px solid #eee;
+        }
+
+        .footer-content {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .dropdown {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            overflow: hidden;
+        }
+
+        .dropdown-header {
+            background: #f8f9fa;
+            padding: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .dropdown-content {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+        <div class="author-message">
+            <h3><span class="emoji">👋</span>Hey everybody,</h3>
+            <p>I made these instructions because this scenario we find ourselves in is incredibly confusing.</p>
+            <p>I wanted somewhere where I could learn all the facts about what I'm able to do and how I'm able to do it in reference to the recent 'role elimination' - so I made a Claude chat to ask questions to. You can do this with any LLM really, but I chose Claude because I'm trying to get sponsored (use referral code: <strong>*Donny*</strong> at checkout).</p>
+            <p>Hope you find this helpful!</p>
+            <div class="signature">
+                <p>Best,<br>
+                Donny<br>
+                <a href="mailto:things@donnybadamo.com" style="color: #7c3aed; text-decoration: none;">things@donnybadamo.com</a></p>
+            </div>
+        </div>
+            <h1><span class="emoji">📄</span>Severance Document Analysis with Claude AI</h1>
+            <p class="subtitle">A Complete Guide for Recently Laid-Off Employees</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="alert-box">
+            <h2><span class="emoji">📢</span>Current Context: Microsoft Layoffs May 2025</h2>
+            <p>Microsoft began laying off about 6,000 workers Tuesday, nearly 3% of its entire workforce and its largest job cuts in more than two years as the company spends heavily on artificial intelligence. According to <a href="https://apnews.com/article/microsoft-layoffs-d1f2de54ebad6f099deac8fbd3375835" target="_blank" style="color: white; text-decoration: underline;">AP News</a>, the layoffs will be across all levels, teams and geographies but the cuts will focus on reducing the number of managers, affecting employees in software engineering, product management, Xbox, LinkedIn, and international offices.</p>
+            <p>If you're one of the thousands of employees affected by this restructuring, this guide will help you maximize the value of your severance package using AI assistance.</p>
+        </div>
+
+        <main>
+            <section>
+                <h2><span class="emoji">🤖</span>Why Use Claude AI for Severance Analysis?</h2>
+                <p>Your severance packet contains <strong>50+ pages</strong> of critical legal and financial information. Claude can help you:</p>
+                <ul>
+                    <li><strong>Extract all key dates and deadlines</strong> (crucial for not missing benefits)</li>
+                    <li><strong>Decode complex legal language</strong> into plain English</li>
+                    <li><strong>Calculate your actual benefits</strong> based on your specific situation</li>
+                    <li><strong>Identify important conditions</strong> you must meet to receive benefits</li>
+                    <li><strong>Create action checklists</strong> tailored to your timeline</li>
+                    <li><strong>Answer follow-up questions</strong> about your specific situation</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2><span class="emoji">📋</span>Step-by-Step Guide</h2>
+
+                <div class="step-card">
+                    <h3><span class="emoji">1️⃣</span>Access Claude</h3>
+                    <ol>
+                        <li>Go to <strong>claude.ai</strong> or download the Claude app</li>
+                        <li>Create a free account (no cost for standard usage)</li>
+                        <li>Start a new conversation</li>
+                    </ol>
+                </div>
+
+                <div class="step-card">
+                    <h3><span class="emoji">2️⃣</span>Upload Your Documents</h3>
+                    <ol>
+                        <li>Click the paper clip icon to upload files</li>
+                        <li>Upload your complete severance packet (PDF format works best)</li>
+                        <li>If you have multiple documents, upload them all at once</li>
+                    </ol>
+                    <div class="tip-box">
+                        <strong>Include these key documents:</strong>
+                        <ul>
+                            <li>Job elimination letter</li>
+                            <li>Severance Agreement and Release (SAR)</li>
+                            <li>Summary Plan Description</li>
+                            <li>Benefits overview</li>
+                            <li>Employee checklist</li>
+                            <li>Any appendices or exhibits</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <h3><span class="emoji">3️⃣</span>Start with This Initial Prompt</h3>
+                    <div class="code-block">
+I was just laid off from Microsoft and received my severance packet. Please:
+
+1. Summarize all the key dates and deadlines I need to know
+2. Explain what benefits I'm eligible for
+3. Tell me what conditions I must meet to receive benefits
+4. Calculate my severance pay based on my specific details
+5. Create a prioritized action checklist for what I need to do immediately
+
+Please be very detailed and specific to my situation.
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <h3><span class="emoji">4️⃣</span>Follow-Up Questions to Ask</h3>
+                    
+                    <div class="dropdown">
+                        <div class="dropdown-header">
+                            <span class="emoji">⏰</span><strong>About Timing:</strong>
+                        </div>
+                        <div class="dropdown-content">
+                            <ul>
+                                <li>"How many days do I have to sign the SAR?"</li>
+                                <li>"When does my access to Microsoft systems end?"</li>
+                                <li>"How long can I search for internal positions?"</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <div class="dropdown-header">
+                            <span class="emoji">💰</span><strong>About Benefits:</strong>
+                        </div>
+                        <div class="dropdown-content">
+                            <ul>
+                                <li>"Exactly how is my severance pay calculated?"</li>
+                                <li>"What happens to my stock options and awards?"</li>
+                                <li>"How does COBRA work and what will Microsoft pay for?"</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <div class="dropdown-header">
+                            <span class="emoji">✅</span><strong>About Requirements:</strong>
+                        </div>
+                        <div class="dropdown-content">
+                            <ul>
+                                <li>"What are all the conditions I must meet to get severance?"</li>
+                                <li>"What happens if I get rehired by Microsoft?"</li>
+                                <li>"What assets do I need to return and how?"</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="dropdown">
+                        <div class="dropdown-header">
+                            <span class="emoji">🎯</span><strong>About Your Options:</strong>
+                        </div>
+                        <div class="dropdown-content">
+                            <ul>
+                                <li>"Should I look for internal Microsoft jobs during my continuation period?"</li>
+                                <li>"What career transition services am I eligible for?"</li>
+                                <li>"How do I apply for unemployment benefits?"</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <h3><span class="emoji">5️⃣</span>Get Specific Calculations</h3>
+                    <p>Ask Claude to work through your specific numbers:</p>
+                    <div class="code-block">
+"Based on my hire date of [DATE], calculate my exact severance weeks"
+"If I worked [X years], how many weeks of severance do I get?"
+"Calculate the reduction for my continuation period"
+                    </div>
+                </div>
+
+                <div class="step-card">
+                    <h3><span class="emoji">6️⃣</span>Create Action Plans</h3>
+                    <p>Request customized plans:</p>
+                    <div class="code-block">
+"Create a week-by-week action plan for my continuation period"
+"What should I prioritize in my first 48 hours?"
+"Make me a checklist for returning assets properly"
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><span class="emoji">💡</span>Sample Questions and Prompts</h2>
+
+                <h3>Comprehensive Analysis</h3>
+                <div class="code-block">
+"Analyze my entire severance package and create a complete summary including:
+- All critical dates with exact deadlines
+- Step-by-step process for maximizing my benefits
+- Hidden conditions or requirements I might miss
+- Recommended strategies for my job search period"
+                </div>
+
+                <h3>Specific Concerns</h3>
+                <div class="code-block">
+"I'm concerned about [SPECIFIC ISSUE]. Please explain:
+- How this affects my benefits
+- What my options are
+- What I should do to protect my interests"
+                </div>
+
+                <h3>Comparison Questions</h3>
+                <div class="code-block">
+"Compare the benefits of signing early vs. waiting until the deadline"
+"What's the difference between staying in my current health plan vs. COBRA?"
+                </div>
+            </section>
+
+            <section>
+                <h2><span class="emoji">🚀</span>Pro Tips for Better Results</h2>
+
+                <div class="tip-box">
+                    <h3><span class="emoji">🎯</span>1. Be Specific About Your Situation</h3>
+                    <ul>
+                        <li>Mention your start date, role level, and any unique circumstances</li>
+                        <li>Share your priorities (e.g., "I want to maximize my severance" vs. "I want to find another job quickly")</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <h3><span class="emoji">📖</span>2. Ask for Examples</h3>
+                    <ul>
+                        <li>"Show me an example calculation"</li>
+                        <li>"Give me a sample email template for [specific situation]"</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <h3><span class="emoji">📊</span>3. Request Different Formats</h3>
+                    <ul>
+                        <li>"Summarize this in bullet points"</li>
+                        <li>"Create a timeline view of all my deadlines"</li>
+                        <li>"Make this into a simple checklist I can print"</li>
+                    </ul>
+                </div>
+
+                <div class="tip-box">
+                    <h3><span class="emoji">🤔</span>4. Get Multiple Perspectives</h3>
+                    <ul>
+                        <li>"What are the pros and cons of each option?"</li>
+                        <li>"What questions should I ask HR about this?"</li>
+                        <li>"What would you recommend in my specific situation?"</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2><span class="emoji">📚</span>What Claude Can Help You Understand</h2>
+
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4><span class="emoji">⏰</span>Critical Deadlines</h4>
+                        <ul>
+                            <li>SAR signing deadline</li>
+                            <li>Asset return requirements</li>
+                            <li>Access termination dates</li>
+                            <li>Internal job search period</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4><span class="emoji">💵</span>Financial Benefits</h4>
+                        <ul>
+                            <li>Severance pay calculations</li>
+                            <li>Stock vesting schedules</li>
+                            <li>COBRA premium payments</li>
+                            <li>401(k) impacts</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4><span class="emoji">⚖️</span>Legal Requirements</h4>
+                        <ul>
+                            <li>Release agreement implications</li>
+                            <li>Non-compete obligations</li>
+                            <li>What claims you're waiving</li>
+                            <li>Your ongoing protections</li>
+                        </ul>
+                    </div>
+
+                    <div class="resource-card">
+                        <h4><span class="emoji">📋</span>Practical Next Steps</h4>
+                        <ul>
+                            <li>Asset return procedures</li>
+                            <li>Internal job search process</li>
+                            <li>Career transition services</li>
+                            <li>Unemployment applications</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="warning-box">
+                    <h2><span class="emoji">⚠️</span>Important Disclaimers</h2>
+                    <ul>
+                        <li><strong>Claude provides information, not legal advice</strong></li>
+                        <li><strong>Always verify critical details with HR or legal counsel</strong></li>
+                        <li><strong>Your specific situation may have unique factors</strong></li>
+                        <li><strong>Claude can't replace professional financial or legal advice</strong></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2><span class="emoji">🚫</span>Common Mistakes to Avoid</h2>
+                <ol>
+                    <li><strong>Not reading everything carefully</strong> - Claude helps you catch important details</li>
+                    <li><strong>Missing deadlines</strong> - Especially the SAR signing deadline</li>
+                    <li><strong>Not understanding stock vesting</strong> - This can be worth thousands</li>
+                    <li><strong>Forgetting about COBRA</strong> - Important for healthcare continuity</li>
+                    <li><strong>Not exploring internal positions</strong> - You may find a better opportunity</li>
+                </ol>
+            </section>
+
+            <section>
+                <h2><span class="emoji">📞</span>Additional Resources</h2>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h4><span class="emoji">🏢</span>Microsoft HR Support</h4>
+                        <p>hrassist@microsoft.com<br>(877) 274-1148</p>
+                    </div>
+                    <div class="resource-card">
+                        <h4><span class="emoji">💼</span>Internal Job Search</h4>
+                        <p>IJS@microsoft.com</p>
+                    </div>
+                    <div class="resource-card">
+                        <h4><span class="emoji">🚀</span>Career Services</h4>
+                        <p>register.lhh.com</p>
+                    </div>
+                    <div class="resource-card">
+                        <h4><span class="emoji">📰</span>AP News Coverage</h4>
+                        <p><a href="https://apnews.com/article/microsoft-layoffs-d1f2de54ebad6f099deac8fbd3375835" target="_blank">Microsoft layoffs impact 3% of workforce</a></p>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <h2><span class="emoji">✨</span>Final Tips</h2>
+                <ol>
+                    <li><strong>Start immediately</strong> - Don't wait to analyze your packet</li>
+                    <li><strong>Save Claude's analysis</strong> - Screenshot or copy important summaries</li>
+                    <li><strong>Ask follow-up questions</strong> - Claude can clarify anything confusing</li>
+                    <li><strong>Share this guide</strong> - Help your colleagues navigate their severance too</li>
+                    <li><strong>Take care of yourself</strong> - This is a stressful time, use all available resources</li>
+                </ol>
+
+                <div class="tip-box">
+                    <p><strong>Remember:</strong> Your severance package is likely worth tens of thousands of dollars and affects your next several months. Taking time to understand it fully with Claude's help can make a significant difference in your transition.</p>
+                </div>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                    <a href="https://claude.ai" class="button" target="_blank">
+                        <span class="emoji">🤖</span>Start Using Claude Now
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p><em>This guide was created to help Microsoft employees affected by the May 2025 layoffs, but the principles apply to severance packages from any company. Claude AI can provide detailed analysis of your specific situation regardless of your employer.</em></p>
+                <p style="margin-top: 1rem;">Created with ❤️ to help fellow employees navigate challenging times</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add dropdown functionality
+        document.querySelectorAll('.dropdown-header').forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const isOpen = content.style.display === 'block';
+                
+                // Close all dropdowns
+                document.querySelectorAll('.dropdown-content').forEach(content => {
+                    content.style.display = 'none';
+                });
+                
+                // Toggle current dropdown
+                if (!isOpen) {
+                    content.style.display = 'block';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
